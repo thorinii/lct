@@ -39,7 +39,7 @@ public class LCTManagerTest {
         assertThat(ConstantTest.CONSTANT, is(11));
     }
 
-    @Test(expected=ConstantSettingException.class)
+    @Test(expected = ConstantSettingException.class)
     public void testSetFailure() {
         LCTManager lct = new LCTManager();
         lct.addField(new ConstantField(ConstantTest.class, "NONEXISTANT", "NonExistant"));

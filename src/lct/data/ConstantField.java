@@ -4,6 +4,7 @@
  */
 package lct.data;
 
+import lct.ConstantSettingException;
 import lct.IntConstant;
 
 /**
@@ -21,6 +22,14 @@ public class ConstantField {
         this.container = container;
         this.field = field;
         this.name = name;
+    }
+
+    public void set(int value) {
+        try {
+            container.getField(field).setInt(null, value);
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            throw new ConstantSettingException(this, e);
+        }
     }
 
     public static ConstantField from(

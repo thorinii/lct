@@ -48,11 +48,6 @@ public class LCTManager {
 
     public void set(String name, int i) {
         ConstantField constant = fields.get(name);
-
-        try {
-            constant.container.getField(constant.field).setInt(null, i);
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-            throw new ConstantSettingException(constant, e);
-        }
+        constant.set(i);
     }
 }
