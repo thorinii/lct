@@ -23,7 +23,7 @@ public class LCTManagerTest {
         lct.register(ConstantTest.class);
 
         assertThat(lct.getFields().size(), is(1));
-        assertThat(lct.getFields(), hasItem(new ConstantField(ConstantTest.class, "CONSTANT", "Constant")));
+        assertThat(lct.getFields(), hasItem(new ConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13)));
     }
 
     @Test
@@ -33,7 +33,7 @@ public class LCTManagerTest {
     @Test
     public void testSet() {
         LCTManager lct = new LCTManager();
-        lct.addField(new ConstantField(ConstantTest.class, "CONSTANT", "Constant"));
+        lct.addField(new ConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13));
 
         lct.set("Constant", 11);
         assertThat(ConstantTest.CONSTANT, is(11));
@@ -42,7 +42,7 @@ public class LCTManagerTest {
     @Test(expected = ConstantSettingException.class)
     public void testSetFailure() {
         LCTManager lct = new LCTManager();
-        lct.addField(new ConstantField(ConstantTest.class, "NONEXISTANT", "NonExistant"));
+        lct.addField(new ConstantField(ConstantTest.class, "NONEXISTANT", "NonExistant", 1, 13));
 
         lct.set("NonExistant", 11);
     }

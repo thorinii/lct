@@ -19,7 +19,7 @@ public class ConstantFieldTest {
 
     @Test
     public void testSetField() {
-        ConstantField constant = new ConstantField(ConstantTest.class, "CONSTANT", "Constant");
+        ConstantField constant = new ConstantField(ConstantTest.class, "CONSTANT", "Constant", 0, 10);
         constant.set(2);
 
         assertThat(ConstantTest.CONSTANT, is(2));

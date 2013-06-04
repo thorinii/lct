@@ -23,6 +23,7 @@ public class LCTFrame extends JFrame {
 
     public LCTFrame(LCTManager manager, String title) {
         super(title);
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
         editor = new LCTEditor(manager);
 
@@ -30,5 +31,8 @@ public class LCTFrame extends JFrame {
         c.setLayout(new BorderLayout());
 
         c.add(BorderLayout.CENTER, editor);
+
+        pack();
+        setSize(Math.max(500, getWidth()), getHeight());
     }
 }

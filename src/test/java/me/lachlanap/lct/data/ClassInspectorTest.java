@@ -49,11 +49,13 @@ public class ClassInspectorTest {
         assertEquals(OneConstantClass.class, constants.get(0).container);
         assertThat(constants.get(0).field, is("CONSTANT"));
         assertThat(constants.get(0).name, is("Constant"));
+        assertThat(constants.get(0).min, is(1));
+        assertThat(constants.get(0).max, is(6));
     }
 
     public static class OneConstantClass {
 
-        @IntConstant(name = "Constant")
+        @IntConstant(name = "Constant", min = 1, max = 6)
         public static int CONSTANT;
     }
 }

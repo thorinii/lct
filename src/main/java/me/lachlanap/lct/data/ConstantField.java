@@ -16,12 +16,25 @@ public class ConstantField {
     public final Class<?> container;
     public final String field;
     public final String name;
+    public final int min, max;
 
     public ConstantField(
-            Class<?> container, String field, String name) {
+            Class<?> container, String field, String name, int min, int max) {
         this.container = container;
         this.field = field;
         this.name = name;
+        this.min = min;
+        this.max = max;
+    }
+
+    public int get() {
+        try {
+            return container.getField(field).getInt(null);
+        } catch (IllegalAccessException e) {
+            throw new ConstantSettingException(this, e);
+        } catch (NoSuchFieldException e) {
+            throw new ConstantSettingException(this, e);
+        }
     }
 
     public void set(int value) {
@@ -53,8 +66,14 @@ public class ConstantField {
         return this.field.equals(other.field) && this.name.equals(other.name);
     }
 
+    @Override
+    public String toString() {
+        return "[" + name + " (" + container.getSimpleName() + "." + field + "]";
+    }
+
     public static ConstantField from(
             Class<?> aClass, String field, IntConstant annot) {
-        return new ConstantField(aClass, field, annot.name());
+        return new ConstantField(aClass, field, 
+                annot.name(), annot.min(), annot.max());
     }
 }
