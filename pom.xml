@@ -36,6 +36,13 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <scm>
+        <connection>scm:git:http://github.com/ThorinII/lct.git</connection>
+        <developerConnection>scm:git:https://github.com/ThorinII/lct.git</developerConnection>
+        <tag>HEAD</tag>
+        <url>http://github.com/ThorinII/lct</url>
+    </scm>
+
     <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
