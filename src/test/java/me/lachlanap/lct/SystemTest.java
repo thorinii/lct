@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package me.lachlanap.lct;
 
 import org.junit.Test;
@@ -18,7 +14,7 @@ public class SystemTest {
         LCTManager lct = new LCTManager();
         lct.register(ConstantTest.class);
         lct.loadSettings();
-        
+
         lct.set("Constant", 11);
         assertEquals(11, ConstantTest.CONSTANT);
     }

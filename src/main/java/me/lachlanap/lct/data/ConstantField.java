@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package me.lachlanap.lct.data;
 
 import me.lachlanap.lct.ConstantSettingException;
@@ -73,7 +69,7 @@ public class ConstantField {
 
     public static ConstantField from(
             Class<?> aClass, String field, IntConstant annot) {
-        return new ConstantField(aClass, field, 
-                annot.name(), annot.min(), annot.max());
+        return new ConstantField(aClass, field,
+                                 annot.name(), annot.min(), annot.max());
     }
 }
