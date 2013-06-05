@@ -1,5 +1,7 @@
 package me.lachlanap.lct.data;
 
+import java.util.Properties;
+import me.lachlanap.lct.ConstantLoadingException;
 import me.lachlanap.lct.ConstantSettingException;
 import me.lachlanap.lct.IntConstant;
 
@@ -8,12 +10,12 @@ import me.lachlanap.lct.IntConstant;
  * @author lachlan
  */
 public class ConstantField {
-
+    
     public final Class<?> container;
     public final String field;
     public final String name;
     public final int min, max;
-
+    
     public ConstantField(
             Class<?> container, String field, String name, int min, int max) {
         this.container = container;
@@ -22,7 +24,7 @@ public class ConstantField {
         this.min = min;
         this.max = max;
     }
-
+    
     public int get() {
         try {
             return container.getField(field).getInt(null);
@@ -32,7 +34,7 @@ public class ConstantField {
             throw new ConstantSettingException(this, e);
         }
     }
-
+    
     public void set(int value) {
         try {
             container.getField(field).setInt(null, value);
@@ -42,7 +44,25 @@ public class ConstantField {
             throw new ConstantSettingException(this, e);
         }
     }
-
+    
+    public void loadFromProperties(Properties props) {
+        String strValue = props.getProperty(name);
+        if (strValue == null)
+            throw new ConstantLoadingException("Constant settings not available");
+        
+        try {
+            int intValue = Integer.parseInt(strValue);
+            set(intValue);
+        } catch (NumberFormatException nfe) {
+            throw new ConstantLoadingException("Error parsing constant value", nfe);
+        }
+    }
+    
+    public void saveToProperties(Properties props) {
+        String strValue = String.valueOf(get());
+        props.setProperty(name, strValue);
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -51,7 +71,7 @@ public class ConstantField {
         hash = 73 * hash + (this.name != null ? this.name.hashCode() : 0);
         return hash;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null || getClass() != obj.getClass())
@@ -61,12 +81,12 @@ public class ConstantField {
             return false;
         return this.field.equals(other.field) && this.name.equals(other.name);
     }
-
+    
     @Override
     public String toString() {
         return "[" + name + " (" + container.getSimpleName() + "." + field + "]";
     }
-
+    
     public static ConstantField from(
             Class<?> aClass, String field, IntConstant annot) {
         return new ConstantField(aClass, field,

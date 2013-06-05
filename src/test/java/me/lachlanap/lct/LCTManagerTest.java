@@ -1,9 +1,10 @@
 package me.lachlanap.lct;
 
+import java.io.IOException;
+import java.util.Properties;
 import me.lachlanap.lct.data.ConstantField;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.junit.Assume.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.matchers.JUnitMatchers.*;
 
@@ -24,12 +25,44 @@ public class LCTManagerTest {
 
     @Test
     public void testLoadSettings() {
+        LCTManager lct = new LCTManager();
+        lct.addConstant(new ConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13));
+
+        Properties props = new Properties();
+        props.setProperty("Constant", "4");
+
+        lct.loadSettings(props);
+
+        assertThat(ConstantTest.CONSTANT, is(4));
+    }
+
+    @Test(expected = ConstantLoadingException.class)
+    public void testLoadSettingsFailure() {
+        LCTManager lct = new LCTManager();
+        lct.addConstant(new ConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13));
+
+        Properties props = new Properties();
+
+        lct.loadSettings(props);
+    }
+
+    @Test
+    public void testSaveSettings() throws IOException {
+        LCTManager lct = new LCTManager();
+        lct.addConstant(new ConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13));
+
+        ConstantTest.CONSTANT = 5;
+
+        Properties props = new Properties();
+        lct.saveSettings(props);
+
+        assertThat(props.getProperty("Constant"), is("5"));
     }
 
     @Test
     public void testSet() {
         LCTManager lct = new LCTManager();
-        lct.addField(new ConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13));
+        lct.addConstant(new ConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13));
 
         lct.set("Constant", 11);
         assertThat(ConstantTest.CONSTANT, is(11));
@@ -38,7 +71,7 @@ public class LCTManagerTest {
     @Test(expected = ConstantSettingException.class)
     public void testSetFailure() {
         LCTManager lct = new LCTManager();
-        lct.addField(new ConstantField(ConstantTest.class, "NONEXISTANT", "NonExistant", 1, 13));
+        lct.addConstant(new ConstantField(ConstantTest.class, "NONEXISTANT", "NonExistant", 1, 13));
 
         lct.set("NonExistant", 11);
     }

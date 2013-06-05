@@ -13,7 +13,6 @@ public class SystemTest {
     public void systemTestInt() {
         LCTManager lct = new LCTManager();
         lct.register(ConstantTest.class);
-        lct.loadSettings();
 
         lct.set("Constant", 11);
         assertEquals(11, ConstantTest.CONSTANT);

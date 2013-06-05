@@ -16,8 +16,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -36,6 +36,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    
     <scm>
         <connection>scm:git:http://github.com/ThorinII/lct.git</connection>
         <developerConnection>scm:git:https://github.com/ThorinII/lct.git</developerConnection>
