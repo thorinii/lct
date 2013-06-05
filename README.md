@@ -67,7 +67,7 @@ frame.setVisible(true);
 ```
 
 When all the tweaking is done, save the settings:
-```
+```java
 String file = "game-constants.properties";
 try {
   lct.saveSettings(file);
