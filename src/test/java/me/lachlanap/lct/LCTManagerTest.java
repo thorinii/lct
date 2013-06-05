@@ -6,6 +6,7 @@ import me.lachlanap.lct.data.ConstantField;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import org.junit.Before;
 import static org.junit.matchers.JUnitMatchers.*;
 
 /**
@@ -13,6 +14,13 @@ import static org.junit.matchers.JUnitMatchers.*;
  * @author lachlan
  */
 public class LCTManagerTest {
+    /**
+     * We need to reset the ConstantTest constants before hand :-)
+     */
+    @Before
+    public void setup(){
+        ConstantTest.CONSTANT = 10;
+    }
 
     @Test
     public void testRegister() {
@@ -36,14 +44,15 @@ public class LCTManagerTest {
         assertThat(ConstantTest.CONSTANT, is(4));
     }
 
-    @Test(expected = ConstantLoadingException.class)
+    @Test
     public void testLoadSettingsFailure() {
         LCTManager lct = new LCTManager();
         lct.addConstant(new ConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13));
 
         Properties props = new Properties();
-
         lct.loadSettings(props);
+
+        assertThat(ConstantTest.CONSTANT, is(10));
     }
 
     @Test

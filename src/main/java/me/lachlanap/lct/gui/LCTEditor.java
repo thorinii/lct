@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -51,13 +52,12 @@ public class LCTEditor extends JPanel {
 
         for (Map.Entry<String, List<ConstantField>> constantClass : mappedConstants.entrySet()) {
             JPanel group = new JPanel();
-            group.setAlignmentX(Component.LEFT_ALIGNMENT);
+            group.setBorder(
+                    BorderFactory.createTitledBorder(
+                    BorderFactory.createLineBorder(Color.BLACK, 1, true),
+                    constantClass.getKey()));
             group.setLayout(new BoxLayout(group, BoxLayout.Y_AXIS));
             root.add(group);
-
-            JLabel className = new JLabel(constantClass.getKey());
-            className.setFont(getFont().deriveFont(Font.BOLD, 20));
-            group.add(className);
 
             for (ConstantField constant : constantClass.getValue()) {
                 ConstantEditor editor = new ConstantEditor(constant);
