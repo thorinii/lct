@@ -2,7 +2,7 @@ package me.lachlanap.lct;
 
 import java.io.IOException;
 import java.util.Properties;
-import me.lachlanap.lct.data.ConstantField;
+import me.lachlanap.lct.data.IntConstantField;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -14,11 +14,12 @@ import static org.junit.matchers.JUnitMatchers.*;
  * @author lachlan
  */
 public class LCTManagerTest {
+
     /**
      * We need to reset the ConstantTest constants before hand :-)
      */
     @Before
-    public void setup(){
+    public void setup() {
         ConstantTest.CONSTANT = 10;
     }
 
@@ -28,13 +29,14 @@ public class LCTManagerTest {
         lct.register(ConstantTest.class);
 
         assertThat(lct.getFields().size(), is(1));
-        assertThat(lct.getFields(), hasItem(new ConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13)));
+        assertEquals(new IntConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13),
+                     lct.getFields().get(0));
     }
 
     @Test
     public void testLoadSettings() {
         LCTManager lct = new LCTManager();
-        lct.addConstant(new ConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13));
+        lct.addConstant(new IntConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13));
 
         Properties props = new Properties();
         props.setProperty("ConstantTest.Constant", "4");
@@ -47,7 +49,7 @@ public class LCTManagerTest {
     @Test
     public void testLoadSettingsFailure() {
         LCTManager lct = new LCTManager();
-        lct.addConstant(new ConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13));
+        lct.addConstant(new IntConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13));
 
         Properties props = new Properties();
         lct.loadSettings(props);
@@ -58,7 +60,7 @@ public class LCTManagerTest {
     @Test
     public void testSaveSettings() throws IOException {
         LCTManager lct = new LCTManager();
-        lct.addConstant(new ConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13));
+        lct.addConstant(new IntConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13));
 
         ConstantTest.CONSTANT = 5;
 
@@ -71,7 +73,7 @@ public class LCTManagerTest {
     @Test
     public void testSet() {
         LCTManager lct = new LCTManager();
-        lct.addConstant(new ConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13));
+        lct.addConstant(new IntConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13));
 
         lct.set("Constant", 11);
         assertThat(ConstantTest.CONSTANT, is(11));
@@ -80,14 +82,14 @@ public class LCTManagerTest {
     @Test(expected = ConstantSettingException.class)
     public void testSetFailure() {
         LCTManager lct = new LCTManager();
-        lct.addConstant(new ConstantField(ConstantTest.class, "NONEXISTANT", "NonExistant", 1, 13));
+        lct.addConstant(new IntConstantField(ConstantTest.class, "NONEXISTANT", "NonExistant", 1, 13));
 
         lct.set("NonExistant", 11);
     }
 
     public static class ConstantTest {
 
-        @IntConstant(name = "Constant", min = 1, max = 13)
+        @Constant(name = "Constant", constraints = "1,13")
         public static int CONSTANT = 10;
     }
 }

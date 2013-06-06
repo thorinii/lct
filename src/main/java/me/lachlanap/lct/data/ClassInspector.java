@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import me.lachlanap.lct.IntConstant;
+import me.lachlanap.lct.Constant;
 
 /**
  *
@@ -13,8 +13,14 @@ import me.lachlanap.lct.IntConstant;
  */
 public class ClassInspector {
 
+    private final ConstantFieldFactory factory;
+
+    public ClassInspector(ConstantFieldFactory factory) {
+        this.factory = factory;
+    }
+
     public List<ConstantField> getConstants(Class<?> aClass) {
-        List<ConstantField> constants = new ArrayList<ConstantField>();
+        List<ConstantField> constants = new ArrayList<>();
         List<Field> fields = Arrays.asList(aClass.getFields());
 
         for (Field field : fields) {
@@ -31,9 +37,9 @@ public class ClassInspector {
     }
 
     private ConstantField processField(Class<?> aClass, Field field) {
-        IntConstant annot = field.getAnnotation(IntConstant.class);
+        Constant annot = field.getAnnotation(Constant.class);
         if (annot != null) {
-            return ConstantField.from(aClass, field.getName(), annot);
+            return factory.createConstantField(aClass, field.getName(), annot);
         }
 
         return null;

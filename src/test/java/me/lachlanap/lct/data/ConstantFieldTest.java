@@ -1,6 +1,6 @@
 package me.lachlanap.lct.data;
 
-import me.lachlanap.lct.IntConstant;
+import me.lachlanap.lct.Constant;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -11,17 +11,18 @@ import org.junit.Before;
  * @author lachlan
  */
 public class ConstantFieldTest {
+
     /**
-     * We need to reset the ConstantTest constants before hand :-)
+     * We need to reset the ConstantTest constants beforehand :-)
      */
     @Before
-    public void setup(){
+    public void setup() {
         ConstantTest.CONSTANT = 10;
     }
 
     @Test
     public void testSetField() {
-        ConstantField constant = new ConstantField(ConstantTest.class, "CONSTANT", "Constant", 0, 10);
+        IntConstantField constant = new IntConstantField(ConstantTest.class, "CONSTANT", "Constant", 0, 10);
         constant.set(2);
 
         assertThat(ConstantTest.CONSTANT, is(2));
@@ -29,7 +30,7 @@ public class ConstantFieldTest {
 
     public static class ConstantTest {
 
-        @IntConstant(name = "Constant", min = 1, max = 13)
+        @Constant(name = "Constant", constraints = "1,13")
         public static int CONSTANT = 10;
     }
 }

@@ -8,12 +8,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import me.lachlanap.lct.data.ClassInspector;
 import me.lachlanap.lct.data.ConstantField;
+import me.lachlanap.lct.data.ConstantFieldFactory;
+import me.lachlanap.lct.data.IntConstantField;
 
 /**
  *
@@ -23,10 +26,20 @@ public class LCTManager {
 
     private final List<ConstantField> constantList;
     private final Map<String, ConstantField> constants;
+    private final ClassInspector inspector;
 
     public LCTManager() {
+        this(new ClassInspector(new ConstantFieldFactory()));
+    }
+
+    public LCTManager(ConstantFieldFactory factory) {
+        this(new ClassInspector(factory));
+    }
+
+    public LCTManager(ClassInspector inspector) {
         constantList = new ArrayList<>();
         constants = new HashMap<>();
+        this.inspector = inspector;
     }
 
     public void addConstant(ConstantField field) {
@@ -35,11 +48,10 @@ public class LCTManager {
     }
 
     public List<ConstantField> getFields() {
-        return constantList;
+        return Collections.unmodifiableList(constantList);
     }
 
     public void register(Class<?> aClass) {
-        ClassInspector inspector = new ClassInspector();
         List<ConstantField> tmp = inspector.getConstants(aClass);
 
         constantList.addAll(tmp);
@@ -81,6 +93,6 @@ public class LCTManager {
 
     public void set(String name, int i) {
         ConstantField constant = constants.get(name);
-        constant.set(i);
+        ((IntConstantField) constant).set(i);
     }
 }

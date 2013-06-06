@@ -1,27 +1,18 @@
 package me.lachlanap.lct;
 
-import me.lachlanap.lct.data.ConstantField;
+import me.lachlanap.lct.data.IntConstantField;
 
 /**
  *
  * @author lachlan
  */
-public class ConstantSettingException extends RuntimeException {
+public class ConstantSettingException extends ConstantException {
 
-    private final ConstantField field;
-
-    public ConstantSettingException(ConstantField field) {
+    public ConstantSettingException(IntConstantField field) {
         super("Could not set field " + field.name + " of " + field.container.getCanonicalName());
-        this.field = field;
     }
 
-    public ConstantSettingException(ConstantField field, Throwable cause) {
-        super("Could not set field " + field.name + " of " + field.container.getCanonicalName(),
-              cause);
-        this.field = field;
-    }
-
-    public ConstantField getField() {
-        return field;
+    public ConstantSettingException(IntConstantField field, Throwable cause) {
+        super("Could not set field " + field.name + " of " + field.container.getCanonicalName(), cause);
     }
 }

@@ -33,17 +33,17 @@ public class MainTesting {
 
     public static class ClassOfConstantTesting {
 
-        @IntConstant(name = "Number", min = 1, max = 13)
+        @Constant(name = "Number", constraints = "1,13")
         public static int NUMBER = 10;
-        @IntConstant(name = "Integer", min = 6, max = 8)
+        @Constant(name = "Integer", constraints = ",8")
         public static int INTEGER = 6;
     }
 
     public static class SecondSetOfConstants {
 
-        @IntConstant(name = "Gravity", min = 0, max = 100)
+        @Constant(name = "Gravity", constraints = "0,100")
         public static int GRAVITY = 7;
-        @IntConstant(name = "Drag", min = 0, max = 10)
+        @Constant(name = "Drag", constraints = "0,10")
         public static int DRAG = 2;
     }
 }

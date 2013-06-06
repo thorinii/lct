@@ -9,11 +9,12 @@ import org.junit.Before;
  * @author lachlan
  */
 public class SystemTest {
+
     /**
      * We need to reset the ConstantTest constants before hand :-)
      */
     @Before
-    public void setup(){
+    public void setup() {
         ConstantTest.CONSTANT = 10;
     }
 
@@ -28,7 +29,7 @@ public class SystemTest {
 
     public static class ConstantTest {
 
-        @IntConstant(name = "Constant", min = 1, max = 13)
+        @Constant(name = "Constant", constraints = "1,13")
         public static int CONSTANT = 10;
     }
 }

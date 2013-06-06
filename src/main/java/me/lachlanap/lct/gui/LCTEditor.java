@@ -2,9 +2,6 @@ package me.lachlanap.lct.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,10 +9,8 @@ import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
 import me.lachlanap.lct.LCTManager;
 import me.lachlanap.lct.data.ConstantField;
 
@@ -26,9 +21,15 @@ import me.lachlanap.lct.data.ConstantField;
 public class LCTEditor extends JPanel {
 
     private final LCTManager manager;
+    private final ConstantEditorFactory factory;
 
     public LCTEditor(LCTManager manager) {
+        this(manager, new ConstantEditorFactory());
+    }
+
+    public LCTEditor(LCTManager manager, ConstantEditorFactory factory) {
         this.manager = manager;
+        this.factory = factory;
 
         setLayout(new BorderLayout());
 
@@ -60,7 +61,7 @@ public class LCTEditor extends JPanel {
             root.add(group);
 
             for (ConstantField constant : constantClass.getValue()) {
-                ConstantEditor editor = new ConstantEditor(constant);
+                ConstantEditor editor = factory.createEditor(constant);
                 group.add(editor);
             }
         }
@@ -71,14 +72,14 @@ public class LCTEditor extends JPanel {
     }
 
     private Map<String, List<ConstantField>> aggregateMappedConstants(List<ConstantField> fields) {
-        Map<String, List<ConstantField>> mappedConstants = new HashMap<String, List<ConstantField>>();
+        Map<String, List<ConstantField>> mappedConstants = new HashMap<>();
 
         for (ConstantField constant : fields) {
             if (mappedConstants.containsKey(constant.container.getSimpleName())) {
                 List<ConstantField> list = mappedConstants.get(constant.container.getSimpleName());
                 list.add(constant);
             } else {
-                List<ConstantField> list = new ArrayList<ConstantField>();
+                List<ConstantField> list = new ArrayList<>();
                 list.add(constant);
                 mappedConstants.put(constant.container.getSimpleName(), list);
             }

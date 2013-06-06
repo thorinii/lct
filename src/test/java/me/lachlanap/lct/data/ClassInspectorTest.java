@@ -1,7 +1,7 @@
 package me.lachlanap.lct.data;
 
 import java.util.List;
-import me.lachlanap.lct.IntConstant;
+import me.lachlanap.lct.Constant;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -14,7 +14,7 @@ public class ClassInspectorTest {
 
     @Test
     public void testBlankClass() {
-        ClassInspector inspector = new ClassInspector();
+        ClassInspector inspector = new ClassInspector(new ConstantFieldFactory());
         List<ConstantField> constants = inspector.getConstants(BlankClass.class);
 
         assertThat(constants.size(), is(0));
@@ -25,7 +25,7 @@ public class ClassInspectorTest {
 
     @Test
     public void testNoConstantsClass() {
-        ClassInspector inspector = new ClassInspector();
+        ClassInspector inspector = new ClassInspector(new ConstantFieldFactory());
         List<ConstantField> constants = inspector.getConstants(NoConstantsClass.class);
 
         assertThat(constants.size(), is(0));
@@ -38,20 +38,22 @@ public class ClassInspectorTest {
 
     @Test
     public void testOneConstantClass() {
-        ClassInspector inspector = new ClassInspector();
+        ClassInspector inspector = new ClassInspector(new ConstantFieldFactory());
         List<ConstantField> constants = inspector.getConstants(OneConstantClass.class);
 
         assertThat(constants.size(), is(1));
-        assertEquals(OneConstantClass.class, constants.get(0).container);
-        assertThat(constants.get(0).field, is("CONSTANT"));
-        assertThat(constants.get(0).name, is("Constant"));
-        assertThat(constants.get(0).min, is(1));
-        assertThat(constants.get(0).max, is(6));
+
+        IntConstantField field = (IntConstantField) constants.get(0);
+        assertEquals(OneConstantClass.class, field.container);
+        assertThat(field.field, is("CONSTANT"));
+        assertThat(field.name, is("Constant"));
+        assertThat(field.min, is(1));
+        assertThat(field.max, is(6));
     }
 
     public static class OneConstantClass {
 
-        @IntConstant(name = "Constant", min = 1, max = 6)
+        @Constant(name = "Constant", constraints = "1,6")
         public static int CONSTANT;
     }
 }
