@@ -1,6 +1,6 @@
 package me.lachlanap.lct;
 
-import me.lachlanap.lct.data.IntConstantField;
+import me.lachlanap.lct.data.ConstantField;
 
 /**
  *
@@ -8,11 +8,11 @@ import me.lachlanap.lct.data.IntConstantField;
  */
 public class ConstantSettingException extends ConstantException {
 
-    public ConstantSettingException(IntConstantField field) {
+    public ConstantSettingException(ConstantField field) {
         super("Could not set field " + field.name + " of " + field.container.getCanonicalName());
     }
 
-    public ConstantSettingException(IntConstantField field, Throwable cause) {
+    public ConstantSettingException(ConstantField field, Throwable cause) {
         super("Could not set field " + field.name + " of " + field.container.getCanonicalName(), cause);
     }
 }

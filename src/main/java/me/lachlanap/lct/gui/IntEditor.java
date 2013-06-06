@@ -1,4 +1,4 @@
-package me.lachlanap.lct.spi.impl;
+package me.lachlanap.lct.gui;
 
 import java.awt.Dimension;
 import java.awt.GridBagLayout;

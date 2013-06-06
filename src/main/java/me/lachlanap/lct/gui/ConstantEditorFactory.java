@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import me.lachlanap.lct.ConstantException;
 import me.lachlanap.lct.data.*;
-import me.lachlanap.lct.spi.impl.IntEditor;
 
 /**
  *

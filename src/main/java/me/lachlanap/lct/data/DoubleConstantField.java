@@ -7,30 +7,30 @@ import me.lachlanap.lct.ConstantSettingException;
  *
  * @author lachlan
  */
-public class IntConstantField extends ConstantField {
+public class DoubleConstantField extends ConstantField {
 
-    public final int min, max;
+    public final double min, max;
 
-    public IntConstantField(Class<?> container, String field, String name,
+    public DoubleConstantField(Class<?> container, String field, String name,
             String constraints) {
         super(container, field, name);
 
-        int min, max;
-        min = Integer.MIN_VALUE;
-        max = Integer.MAX_VALUE;
+        double min, max;
+        min = Double.MIN_VALUE;
+        max = Double.MAX_VALUE;
 
         if (!constraints.isEmpty()) {
             int comma = constraints.indexOf(',');
             if (comma == -1)
-                min = Integer.parseInt(constraints);
+                min = Double.parseDouble(constraints);
             else if (comma == constraints.length() - 1)
-                min = Integer.parseInt(constraints.substring(0, constraints.length() - 1));
+                min = Double.parseDouble(constraints.substring(0, constraints.length() - 1));
             else if (comma == 0)
-                max = Integer.parseInt(constraints.substring(1));
+                max = Double.parseDouble(constraints.substring(1));
             else {
                 String[] split = constraints.split(",");
-                min = Integer.parseInt(split[0]);
-                max = Integer.parseInt(split[1]);
+                min = Double.parseDouble(split[0]);
+                max = Double.parseDouble(split[1]);
             }
         }
 
@@ -38,24 +38,24 @@ public class IntConstantField extends ConstantField {
         this.max = max;
     }
 
-    public IntConstantField(
-            Class<?> container, String field, String name, int min, int max) {
+    public DoubleConstantField(
+            Class<?> container, String field, String name, double min, double max) {
         super(container, field, name);
         this.min = min;
         this.max = max;
     }
 
-    public int get() {
+    public double get() {
         try {
-            return container.getField(field).getInt(null);
+            return container.getField(field).getDouble(null);
         } catch (IllegalAccessException | NoSuchFieldException e) {
             throw new ConstantSettingException(this, e);
         }
     }
 
-    public void set(int value) {
+    public void set(double value) {
         try {
-            container.getField(field).setInt(null, value);
+            container.getField(field).setDouble(null, value);
         } catch (IllegalAccessException | NoSuchFieldException e) {
             throw new ConstantSettingException(this, e);
         }
@@ -71,8 +71,8 @@ public class IntConstantField extends ConstantField {
             return;
 
         try {
-            int intValue = Integer.parseInt(strValue);
-            set(intValue);
+            double doubleValue = Double.parseDouble(strValue);
+            set(doubleValue);
         } catch (NumberFormatException nfe) {
         }
     }

@@ -27,9 +27,27 @@ public class ConstantFieldFactoryTest {
         assertThat(intField.max, is(1));
     }
 
+    @Test
+    public void testDoubleConstant() throws NoSuchFieldException {
+        ConstantFieldFactory factory = new ConstantFieldFactory();
+        String name = "DOUBLE";
+
+        ConstantField field = factory.createConstantField(Constants.class,
+                                                          name,
+                                                          Constants.class.getField(name).getAnnotation(Constant.class));
+
+        assertThat(field, is(DoubleConstantField.class));
+
+        DoubleConstantField doubleField = (DoubleConstantField) field;
+        assertThat(doubleField.min, is(Double.MIN_VALUE));
+        assertThat(doubleField.max, is(500.3));
+    }
+
     public static class Constants {
 
-        @Constant(name = "Constant", constraints = "0,1")
+        @Constant(name = "Integer", constraints = "0,1")
         public static int INTEGER;
+        @Constant(name = "Double", constraints = ",500.3")
+        public static double DOUBLE;
     }
 }
