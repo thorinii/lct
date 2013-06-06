@@ -48,7 +48,7 @@ public class ConstantField {
      * Loads this constant's settings from the Properties. If they don't exist this will do nothing.
      */
     public void loadFromProperties(Properties props) {
-        String strValue = props.getProperty(name);
+        String strValue = props.getProperty(container.getSimpleName() + "." + name);
         if (strValue == null)
             return;
 
@@ -61,7 +61,7 @@ public class ConstantField {
 
     public void saveToProperties(Properties props) {
         String strValue = String.valueOf(get());
-        props.setProperty(name, strValue);
+        props.setProperty(container.getSimpleName() + "." + name, strValue);
     }
 
     @Override

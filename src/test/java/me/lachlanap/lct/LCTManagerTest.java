@@ -37,7 +37,7 @@ public class LCTManagerTest {
         lct.addConstant(new ConstantField(ConstantTest.class, "CONSTANT", "Constant", 1, 13));
 
         Properties props = new Properties();
-        props.setProperty("Constant", "4");
+        props.setProperty("ConstantTest.Constant", "4");
 
         lct.loadSettings(props);
 
@@ -65,7 +65,7 @@ public class LCTManagerTest {
         Properties props = new Properties();
         lct.saveSettings(props);
 
-        assertThat(props.getProperty("Constant"), is("5"));
+        assertThat(props.getProperty("ConstantTest.Constant"), is("5"));
     }
 
     @Test
