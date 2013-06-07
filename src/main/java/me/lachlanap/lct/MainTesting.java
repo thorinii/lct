@@ -37,13 +37,17 @@ public class MainTesting {
         public static int NUMBER = 10;
         @Constant(name = "Integer", constraints = ",8")
         public static int INTEGER = 6;
+        @Constant(name = "Long", constraints = ",1000")
+        public static long LONG = 6;
     }
 
     public static class SecondSetOfConstants {
 
-        @Constant(name = "Gravity", constraints = "0,100")
-        public static int GRAVITY = 7;
+        @Constant(name = "Cycles", constraints = "0,50")
+        public static int CYCLES = 7;
+        @Constant(name = "Gravity", constraints = "0,10")
+        public static double GRAVITY = 9.81;
         @Constant(name = "Drag", constraints = "0,10")
-        public static int DRAG = 2;
+        public static float DRAG = 5;
     }
 }

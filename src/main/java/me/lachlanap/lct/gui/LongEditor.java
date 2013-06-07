@@ -9,25 +9,28 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import me.lachlanap.lct.data.IntConstantField;
+import me.lachlanap.lct.data.LongConstantField;
 
 /**
  *
  * @author lachlan
  */
-public class IntEditor extends ConstantEditor {
+public class LongEditor extends ConstantEditor {
 
-    private final IntConstantField constant;
+    private final LongConstantField constant;
     private final JSlider slider;
     private final JTextField value;
 
-    public IntEditor(IntConstantField constant) {
+    public LongEditor(LongConstantField constant) {
         super(constant);
         this.constant = constant;
 
-        int min = (constant.min == Integer.MIN_VALUE) ? -100 : constant.min;
-        int max = (constant.max == Integer.MAX_VALUE) ? 100 : constant.max;
-        int constantValue = constant.get();
+        int min = (int) ((constant.min == Integer.MIN_VALUE) ? -100 : constant.min);
+        int max = (int) ((constant.max == Integer.MAX_VALUE) ? 100 : constant.max);
+        min = Math.min(min, max);
+        max = Math.max(max, min);
+        
+        int constantValue = (int) constant.get();
 
         setLayout(new GridBagLayout());
 

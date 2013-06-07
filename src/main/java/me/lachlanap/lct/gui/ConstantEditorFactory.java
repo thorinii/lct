@@ -17,7 +17,11 @@ public class ConstantEditorFactory {
 
     public ConstantEditorFactory() {
         editors = new HashMap<>();
+        
         addEditor(IntConstantField.class, IntEditor.class);
+        addEditor(LongConstantField.class, LongEditor.class);
+        addEditor(FloatConstantField.class, FloatEditor.class);
+        addEditor(DoubleConstantField.class, DoubleEditor.class);
     }
 
     public void addEditor(Class<? extends ConstantField> constant, Class<? extends ConstantEditor> editor) {
