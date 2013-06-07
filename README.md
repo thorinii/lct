@@ -3,7 +3,7 @@ lct - The Live Constant Tweaker
 
 The Live Constant Tweaker is designed for use in game developement, to help get your numbers (eg physics constants, timers) _just right_. It is Java based.
 
-This is still a work in progress - as such you can't really use it yet.
+This is still a work in progress - as such it shouldn't really be used for 'real' projects.
 
 [![Build Status](https://travis-ci.org/ThorinII/lct.png?branch=master)](https://travis-ci.org/ThorinII/lct)
 
@@ -13,23 +13,21 @@ Expected Use
 Defining constants
 ------------------
 
-I'm not sure whether there'll be just a *Constant* annotation or one for each data type.
-Here's an example of with typed annotations.
-
+Define your constants as ```public static``` fields (not ```final``` - that would defeat the purpose of tweaking), and annotate them with the Constant annotation:
 ```java
 public static class PhysicsConstants {
-  @FloatConstant(name = "Gravity", min = 0, max = 100)
+  @Constant(name = "Gravity", constraints = "1,100")
   public static float GRAVITY = 9.81f;
   
-  @IntConstant(name = "Substeps in Frame", min = 1)
+  @Constant(name = "Substeps in Frame", constraints = "1,")
   public static int NUMBER_OF_SUBSTEPS = 3;
   
-  @DoubleConstant(name = "Coefficient of Friction")
+  @Constant(name = "Coefficient of Friction")
   public static double FRICTION_COEFFICIENT = 0.3;
 }
 ```
 
-What I'd like to do is use just one *Constant* annotation, and determine the type from the field signature, but I'm not sure how to handle things like _min_ and _max_.
+Note there is just one Constant annotation. Currently, you specify constraints like a limited range using a String - the exact format depends on the type of the field, but for number constants use it like this: "min,max", where either min or max can be omitted. Note the constraints parameter is optional.
 
 Using the system
 ----------------
