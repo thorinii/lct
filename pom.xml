@@ -11,6 +11,12 @@
     <description>Live Constant Tweaker provides a GUI to tweak public static constants on the fly.</description>
     <url>http://github.com/ThorinII/lct</url>
 
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
     <build>
         <plugins>
             <plugin>
