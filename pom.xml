@@ -2,13 +2,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>me.lachlanap</groupId>
-    <artifactId>LiveConstantTweaker</artifactId>
+    <groupId>me.lachlanap.lct</groupId>
+    <artifactId>lct</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>LiveConstantTweaker</name>
-    <url>http://maven.apache.org</url>
+    <name>Live Constant Tweaker</name>
+    <description>Live Constant Tweaker provides a GUI to tweak public static constants on the fly.</description>
+    <url>http://github.com/ThorinII/lct</url>
+
     <build>
         <plugins>
             <plugin>
@@ -16,12 +18,21 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
+                    <encoding>UTF-8</encoding>
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://choosealicense.com/licenses/mit/</url>
+        </license>
+    </licenses>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -40,9 +51,16 @@
     <scm>
         <connection>scm:git:http://github.com/ThorinII/lct.git</connection>
         <developerConnection>scm:git:https://github.com/ThorinII/lct.git</developerConnection>
-        <tag>HEAD</tag>
         <url>http://github.com/ThorinII/lct</url>
     </scm>
+
+    <developers>
+        <developer>
+            <id>ThorinII</id>
+            <name>Lachlan Phillips</name>
+            <email>flipsidelachy@gmail.com</email>
+        </developer>
+    </developers>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

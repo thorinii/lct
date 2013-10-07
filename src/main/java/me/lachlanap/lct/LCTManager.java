@@ -8,11 +8,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import me.lachlanap.lct.data.ClassInspector;
 import me.lachlanap.lct.data.ConstantField;
 import me.lachlanap.lct.data.ConstantFieldFactory;
@@ -24,7 +25,7 @@ import me.lachlanap.lct.data.IntConstantField;
  */
 public class LCTManager {
 
-    private final List<ConstantField> constantList;
+    private final Set<ConstantField> constantList;
     private final Map<String, ConstantField> constants;
     private final ClassInspector inspector;
 
@@ -37,7 +38,7 @@ public class LCTManager {
     }
 
     public LCTManager(ClassInspector inspector) {
-        constantList = new ArrayList<>();
+        constantList = new HashSet<>();
         constants = new HashMap<>();
         this.inspector = inspector;
     }
@@ -48,7 +49,7 @@ public class LCTManager {
     }
 
     public List<ConstantField> getFields() {
-        return Collections.unmodifiableList(constantList);
+        return new ArrayList<>(constantList);
     }
 
     public void register(Class<?> aClass) {
