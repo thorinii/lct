@@ -8,8 +8,10 @@ import me.lachlanap.lct.spi.ConstantFieldProvider;
 import me.lachlanap.lct.spi.impl.PrimitivesProvider;
 
 /**
+ * A provider based system for creating {@link ConstantField}s from raw fields.
  *
- * @author lachlan
+ * This implementation is initialised with a {@link PrimitivesProvider}.
+ * @author Lachlan Phillips
  */
 public class ConstantFieldFactory {
 
@@ -20,11 +22,25 @@ public class ConstantFieldFactory {
         providers.add(new PrimitivesProvider());
     }
 
+    /**
+     * Adds a provider to the end of the provider list.
+     */
     public void addProvider(ConstantFieldProvider provider) {
         providers.add(provider);
     }
 
-    public ConstantField createConstantField(Class<?> container, String field, Constant annot) {
+    /**
+     * Tries to create a ConstantField from a raw field. Cycles through all the providers
+     * until one is found that can satisfy.
+     * <p/>
+     * @param container the class enclosing the field
+     * @param field the name of the field
+     * @param annot the Constant annotation to extract constraints from
+     * @return the constructed ConstantField
+     * @throws ConstantException when the field cannot be found, or no provider is found
+     */
+    public ConstantField createConstantField(Class<?> container, String field, Constant annot)
+            throws ConstantException {
         Class<?> type;
 
         try {
@@ -39,8 +55,7 @@ public class ConstantFieldFactory {
                 return provider.getField(type, container, field, annot);
         }
 
-        throw new ConstantException("Cannot setup constant " + annot.name()
-                + " of type " + type.getSimpleName()
-                + "; no provider");
+        throw new ConstantException("No provider found for " + annot.name()
+                + " of type " + type.getSimpleName());
     }
 }

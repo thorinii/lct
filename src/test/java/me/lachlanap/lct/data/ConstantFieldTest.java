@@ -8,7 +8,7 @@ import org.junit.Before;
 
 /**
  *
- * @author lachlan
+ * @author Lachlan Phillips
  */
 public class ConstantFieldTest {
 

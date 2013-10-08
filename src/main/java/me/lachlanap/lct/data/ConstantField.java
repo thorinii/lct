@@ -3,8 +3,10 @@ package me.lachlanap.lct.data;
 import java.util.Properties;
 
 /**
+ * Base for constant field. This stores a reference to the field.
  *
- * @author lachlan
+ * Subclass this to introduce new types of fields - see {@link IntConstantField} as an example.
+ * @author Lachlan Phillips
  */
 public abstract class ConstantField {
 
@@ -22,7 +24,7 @@ public abstract class ConstantField {
     public boolean equals(Object obj) {
         if (obj == null || getClass() != obj.getClass())
             return false;
-        IntConstantField other = (IntConstantField) obj;
+        ConstantField other = (ConstantField) obj;
         if (this.container != other.container && (this.container == null || !this.container.equals(other.container)))
             return false;
         return this.field.equals(other.field) && this.name.equals(other.name);
@@ -42,6 +44,9 @@ public abstract class ConstantField {
      */
     public abstract void loadFromProperties(Properties props);
 
+    /**
+     * Saves this constant's settings from the Properties. If they don't exist this will do nothing.
+     */
     public abstract void saveToProperties(Properties props);
 
     @Override

@@ -10,7 +10,7 @@ import me.lachlanap.lct.spi.ConstantFieldProvider;
 
 /**
  *
- * @author lachlan
+ * @author Lachlan Phillips
  */
 public class PrimitivesProvider implements ConstantFieldProvider {
 

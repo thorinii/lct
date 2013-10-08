@@ -9,7 +9,7 @@ import me.lachlanap.lct.data.*;
 
 /**
  *
- * @author lachlan
+ * @author Lachlan Phillips
  */
 public class ConstantEditorFactory {
 

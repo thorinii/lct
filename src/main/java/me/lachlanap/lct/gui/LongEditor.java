@@ -13,7 +13,7 @@ import me.lachlanap.lct.data.LongConstantField;
 
 /**
  *
- * @author lachlan
+ * @author Lachlan Phillips
  */
 public class LongEditor extends ConstantEditor {
 

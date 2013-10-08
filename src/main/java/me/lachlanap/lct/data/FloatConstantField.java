@@ -5,7 +5,7 @@ import me.lachlanap.lct.ConstantSettingException;
 
 /**
  *
- * @author lachlan
+ * @author Lachlan Phillips
  */
 public class FloatConstantField extends ConstantField {
 

@@ -1,8 +1,7 @@
 package me.lachlanap.lct;
 
 /**
- *
- * @author lachlan
+ * @author Lachlan Phillips
  */
 public class ConstantException extends RuntimeException {
 

@@ -15,7 +15,7 @@ import me.lachlanap.lct.data.FloatConstantField;
 
 /**
  *
- * @author lachlan
+ * @author Lachlan Phillips
  */
 public class FloatEditor extends ConstantEditor {
 

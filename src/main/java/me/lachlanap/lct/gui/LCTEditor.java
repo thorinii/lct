@@ -15,8 +15,8 @@ import me.lachlanap.lct.LCTManager;
 import me.lachlanap.lct.data.ConstantField;
 
 /**
- *
- * @author lachlan
+ * A panel that displays editors for every field in the LCTManager.
+ * @author Lachlan Phillips
  */
 public class LCTEditor extends JPanel {
 

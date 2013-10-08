@@ -15,7 +15,7 @@ import me.lachlanap.lct.data.DoubleConstantField;
 
 /**
  *
- * @author lachlan
+ * @author Lachlan Phillips
  */
 public class DoubleEditor extends ConstantEditor {
 

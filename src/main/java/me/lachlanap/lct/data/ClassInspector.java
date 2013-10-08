@@ -8,17 +8,29 @@ import java.util.List;
 import me.lachlanap.lct.Constant;
 
 /**
- *
- * @author lachlan
+ * Field extractor.
+ * @author Lachlan Phillips
  */
 public class ClassInspector {
 
-    private final ConstantFieldFactory factory;
+    /**
+     * The ConstantFieldFactory from construction.
+     */
+    protected final ConstantFieldFactory factory;
 
+    /**
+     * Creates a ClassInspector with specified ConstantFieldFactory.
+     * @param factory
+     */
     public ClassInspector(ConstantFieldFactory factory) {
         this.factory = factory;
     }
 
+    /**
+     * Gets all fields that are potential 'constants'.
+     * @param aClass the class to work from
+     * @return all constants that could be found
+     */
     public List<ConstantField> getConstants(Class<?> aClass) {
         List<ConstantField> constants = new ArrayList<>();
         List<Field> fields = Arrays.asList(aClass.getFields());
@@ -36,7 +48,15 @@ public class ClassInspector {
         return constants;
     }
 
-    private ConstantField processField(Class<?> aClass, Field field) {
+    /**
+     * Converts a field/potential-constant into a ConstantField.
+     * Returns null if the field cannot be constant.
+     * Override this to change how fields are processed.
+     * @param aClass the class the field came from
+     * @param field the field
+     * @return a ConstantField or null
+     */
+    protected ConstantField processField(Class<?> aClass, Field field) {
         Constant annot = field.getAnnotation(Constant.class);
         if (annot != null) {
             return factory.createConstantField(aClass, field.getName(), annot);

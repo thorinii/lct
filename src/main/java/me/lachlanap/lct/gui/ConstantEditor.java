@@ -5,7 +5,7 @@ import me.lachlanap.lct.data.ConstantField;
 
 /**
  *
- * @author lachlan
+ * @author Lachlan Phillips
  */
 public class ConstantEditor extends JPanel {
 

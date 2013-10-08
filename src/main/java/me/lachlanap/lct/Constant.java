@@ -4,8 +4,8 @@ import java.lang.annotation.*;
 
 /**
  * Specifies a field is a constant.
- * <p/>
- * @author lachlan
+ *
+ * @author Lachlan Phillips
  */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Constant {

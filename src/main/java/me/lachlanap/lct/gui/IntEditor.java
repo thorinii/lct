@@ -13,7 +13,7 @@ import me.lachlanap.lct.data.IntConstantField;
 
 /**
  *
- * @author lachlan
+ * @author Lachlan Phillips
  */
 public class IntEditor extends ConstantEditor {
 

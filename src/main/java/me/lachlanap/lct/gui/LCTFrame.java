@@ -6,8 +6,8 @@ import javax.swing.JFrame;
 import me.lachlanap.lct.LCTManager;
 
 /**
- *
- * @author lachlan
+ * A frame that solely holds a LCTEditor.
+ * @author Lachlan Phillips
  */
 public class LCTFrame extends JFrame {
 

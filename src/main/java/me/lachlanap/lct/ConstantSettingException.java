@@ -3,8 +3,7 @@ package me.lachlanap.lct;
 import me.lachlanap.lct.data.ConstantField;
 
 /**
- *
- * @author lachlan
+ * @author Lachlan Phillips
  */
 public class ConstantSettingException extends ConstantException {
 

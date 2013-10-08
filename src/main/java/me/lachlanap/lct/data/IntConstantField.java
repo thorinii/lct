@@ -4,8 +4,8 @@ import java.util.Properties;
 import me.lachlanap.lct.ConstantSettingException;
 
 /**
- *
- * @author lachlan
+ * A ConstantField that references an int field.
+ * @author Lachlan Phillips
  */
 public class IntConstantField extends ConstantField {
 
@@ -45,6 +45,11 @@ public class IntConstantField extends ConstantField {
         this.max = max;
     }
 
+    /**
+     * Gets the value of the field.
+     * @return the value
+     * @throws ConstantSettingException if getting fails
+     */
     public int get() {
         try {
             return container.getField(field).getInt(null);
@@ -53,6 +58,11 @@ public class IntConstantField extends ConstantField {
         }
     }
 
+    /**
+     * Sets the value of the field.
+     * @param value the value
+     * @throws ConstantSettingException if setting fails
+     */
     public void set(int value) {
         try {
             container.getField(field).setInt(null, value);
@@ -76,7 +86,10 @@ public class IntConstantField extends ConstantField {
         } catch (NumberFormatException nfe) {
         }
     }
-
+    
+    /**
+     * Loads this constant's settings from the Properties. If they don't exist this will do nothing.
+     */
     @Override
     public void saveToProperties(Properties props) {
         String strValue = String.valueOf(get());

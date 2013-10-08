@@ -8,7 +8,7 @@ import static org.hamcrest.CoreMatchers.*;
 
 /**
  *
- * @author lachlan
+ * @author Lachlan Phillips
  */
 public class ClassInspectorTest {
 

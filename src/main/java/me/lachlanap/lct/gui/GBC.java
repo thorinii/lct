@@ -4,8 +4,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
 /**
- *
- * @author lachlan
+ * A class that makes GridBagConstraints easier to use, in a builder fashion.
+ * @author Lachlan Phillips
  */
 public class GBC extends GridBagConstraints {
 
