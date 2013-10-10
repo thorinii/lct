@@ -49,6 +49,11 @@ public abstract class ConstantField {
      */
     public abstract void saveToProperties(Properties props);
 
+    /**
+     * Resets this constant to it's original value.
+     */
+    public abstract void reset();
+
     @Override
     public String toString() {
         return "[" + name + " (" + container.getSimpleName() + "." + field + "]";

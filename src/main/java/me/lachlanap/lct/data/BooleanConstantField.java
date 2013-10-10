@@ -9,8 +9,11 @@ import me.lachlanap.lct.ConstantSettingException;
  */
 public class BooleanConstantField extends ConstantField {
 
+    public final boolean original;
+
     public BooleanConstantField(Class<?> container, String field, String name) {
         super(container, field, name);
+        original = get();
     }
 
     /**
@@ -59,5 +62,10 @@ public class BooleanConstantField extends ConstantField {
     public void saveToProperties(Properties props) {
         String strValue = String.valueOf(get());
         props.setProperty(container.getSimpleName() + "." + name, strValue);
+    }
+
+    @Override
+    public void reset() {
+        set(original);
     }
 }

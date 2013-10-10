@@ -10,6 +10,7 @@ import me.lachlanap.lct.ConstantSettingException;
 public class FloatConstantField extends ConstantField {
 
     public final float min, max;
+    public final float original;
 
     public FloatConstantField(Class<?> container, String field, String name,
             String constraints) {
@@ -36,6 +37,7 @@ public class FloatConstantField extends ConstantField {
 
         this.min = min;
         this.max = max;
+        this.original = get();
     }
 
     public FloatConstantField(
@@ -43,6 +45,7 @@ public class FloatConstantField extends ConstantField {
         super(container, field, name);
         this.min = min;
         this.max = max;
+        this.original = get();
     }
 
     public float get() {
@@ -81,5 +84,10 @@ public class FloatConstantField extends ConstantField {
     public void saveToProperties(Properties props) {
         String strValue = String.valueOf(get());
         props.setProperty(container.getSimpleName() + "." + name, strValue);
+    }
+
+    @Override
+    public void reset() {
+        set(original);
     }
 }

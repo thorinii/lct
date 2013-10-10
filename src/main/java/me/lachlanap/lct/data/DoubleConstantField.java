@@ -10,6 +10,7 @@ import me.lachlanap.lct.ConstantSettingException;
 public class DoubleConstantField extends ConstantField {
 
     public final double min, max;
+    public final double original;
 
     public DoubleConstantField(Class<?> container, String field, String name,
             String constraints) {
@@ -36,6 +37,7 @@ public class DoubleConstantField extends ConstantField {
 
         this.min = min;
         this.max = max;
+        this.original = get();
     }
 
     public DoubleConstantField(
@@ -43,6 +45,7 @@ public class DoubleConstantField extends ConstantField {
         super(container, field, name);
         this.min = min;
         this.max = max;
+        this.original = get();
     }
 
     public double get() {
@@ -81,5 +84,10 @@ public class DoubleConstantField extends ConstantField {
     public void saveToProperties(Properties props) {
         String strValue = String.valueOf(get());
         props.setProperty(container.getSimpleName() + "." + name, strValue);
+    }
+
+    @Override
+    public void reset() {
+        set(original);
     }
 }

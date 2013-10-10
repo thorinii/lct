@@ -10,6 +10,7 @@ import me.lachlanap.lct.ConstantSettingException;
 public class IntConstantField extends ConstantField {
 
     public final int min, max;
+    public final int original;
 
     public IntConstantField(Class<?> container, String field, String name,
             String constraints) {
@@ -36,6 +37,7 @@ public class IntConstantField extends ConstantField {
 
         this.min = min;
         this.max = max;
+        this.original = get();
     }
 
     public IntConstantField(
@@ -43,6 +45,7 @@ public class IntConstantField extends ConstantField {
         super(container, field, name);
         this.min = min;
         this.max = max;
+        this.original = get();
     }
 
     /**
@@ -86,7 +89,7 @@ public class IntConstantField extends ConstantField {
         } catch (NumberFormatException nfe) {
         }
     }
-    
+
     /**
      * Loads this constant's settings from the Properties. If they don't exist this will do nothing.
      */
@@ -94,5 +97,10 @@ public class IntConstantField extends ConstantField {
     public void saveToProperties(Properties props) {
         String strValue = String.valueOf(get());
         props.setProperty(container.getSimpleName() + "." + name, strValue);
+    }
+
+    @Override
+    public void reset() {
+        set(original);
     }
 }
