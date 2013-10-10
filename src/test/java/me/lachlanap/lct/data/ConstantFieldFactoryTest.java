@@ -18,7 +18,7 @@ public class ConstantFieldFactoryTest {
 
         ConstantField field = factory.createConstantField(Constants.class,
                                                           name,
-                                                          Constants.class.getField(name).getAnnotation(Constant.class));
+                                                          Constants.class.getDeclaredField(name).getAnnotation(Constant.class));
 
         assertThat(field, is(IntConstantField.class));
 
@@ -34,7 +34,7 @@ public class ConstantFieldFactoryTest {
 
         ConstantField field = factory.createConstantField(Constants.class,
                                                           name,
-                                                          Constants.class.getField(name).getAnnotation(Constant.class));
+                                                          Constants.class.getDeclaredField(name).getAnnotation(Constant.class));
 
         assertThat(field, is(DoubleConstantField.class));
 
@@ -50,7 +50,7 @@ public class ConstantFieldFactoryTest {
 
         ConstantField field = factory.createConstantField(Constants.class,
                                                           name,
-                                                          Constants.class.getField(name).getAnnotation(Constant.class));
+                                                          Constants.class.getDeclaredField(name).getAnnotation(Constant.class));
 
         assertThat(field, is(BooleanConstantField.class));
 

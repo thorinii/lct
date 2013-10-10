@@ -29,7 +29,7 @@ public class LongEditor extends ConstantEditor {
         int max = (int) ((constant.max == Integer.MAX_VALUE) ? 100 : constant.max);
         min = Math.min(min, max);
         max = Math.max(max, min);
-        
+
         int constantValue = (int) constant.get();
 
         setLayout(new GridBagLayout());
@@ -51,6 +51,11 @@ public class LongEditor extends ConstantEditor {
 
         setMaximumSize(new Dimension(Integer.MAX_VALUE,
                                      getLayout().preferredLayoutSize(this).height));
+    }
+
+    @Override
+    public void updateConstant() {
+        slider.setValue((int) constant.get());
     }
 
     private class SliderChangeListener implements ChangeListener {

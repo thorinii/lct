@@ -50,6 +50,12 @@ public class IntEditor extends ConstantEditor {
                                      getLayout().preferredLayoutSize(this).height));
     }
 
+    @Override
+    public void updateConstant() {
+        int constantValue = constant.get();
+        slider.setValue(constantValue);
+    }
+
     private class SliderChangeListener implements ChangeListener {
 
         @Override

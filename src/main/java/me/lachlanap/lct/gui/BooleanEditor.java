@@ -35,6 +35,11 @@ public class BooleanEditor extends ConstantEditor {
                                      getLayout().preferredLayoutSize(this).height));
     }
 
+    @Override
+    public void updateConstant() {
+        checkBox.setSelected(constant.get());
+    }
+
     private class CheckBoxChangeListener implements ChangeListener {
 
         @Override

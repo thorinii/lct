@@ -60,6 +60,11 @@ public class DoubleEditor extends ConstantEditor {
                                      getLayout().preferredLayoutSize(this).height));
     }
 
+    @Override
+    public void updateConstant() {
+        slider.setValue(d2i(constant.get()));
+    }
+
     private int d2i(double d) {
         return (int) ((d - shift) * scale);
     }

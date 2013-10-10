@@ -3,8 +3,10 @@ package me.lachlanap.lct.data;
 import java.util.List;
 import me.lachlanap.lct.Constant;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 /**
  *

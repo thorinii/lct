@@ -2,15 +2,13 @@ package me.lachlanap.lct.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import me.lachlanap.lct.LCTManager;
 import me.lachlanap.lct.data.ConstantField;
 
@@ -60,9 +58,19 @@ public class LCTEditor extends JPanel {
             group.setLayout(new BoxLayout(group, BoxLayout.Y_AXIS));
             root.add(group);
 
-            for (ConstantField constant : constantClass.getValue()) {
-                ConstantEditor editor = factory.createEditor(constant);
+            for (final ConstantField constant : constantClass.getValue()) {
+                final ConstantEditor editor = factory.createEditor(constant);
                 group.add(editor);
+
+                JButton resetBtn = new JButton("Reset");
+                resetBtn.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        constant.reset();
+                        editor.updateConstant();
+                    }
+                });
+                group.add(resetBtn);
             }
         }
 

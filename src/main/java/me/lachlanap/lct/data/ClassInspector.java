@@ -36,12 +36,15 @@ public class ClassInspector {
      */
     public List<ConstantField> getConstants(Class<?> aClass) {
         List<ConstantField> constants = new ArrayList<>();
-        List<Field> fields = Arrays.asList(aClass.getFields());
+        List<Field> fields = Arrays.asList(aClass.getDeclaredFields());
 
         for (Field field : fields) {
-            if (Modifier.isStatic(field.getModifiers())) {
-                if (tryMakeAccessible && !Modifier.isPublic(field.getModifiers()))
-                    field.setAccessible(true);
+            if (Modifier.isStatic(field.getModifiers()) && !Modifier.isFinal(field.getModifiers())) {
+                if (!Modifier.isPublic(field.getModifiers()))
+                    if (tryMakeAccessible)
+                        field.setAccessible(true);
+                    else
+                        continue;
                 constants.add(processField(aClass, field));
             }
         }

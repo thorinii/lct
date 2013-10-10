@@ -29,7 +29,7 @@ public class FloatEditor extends ConstantEditor {
     public FloatEditor(FloatConstantField constant) {
         super(constant);
         this.constant = constant;
-        
+
         df.setMinimumFractionDigits(2);
 
         setLayout(new GridBagLayout());
@@ -58,6 +58,11 @@ public class FloatEditor extends ConstantEditor {
 
         setMaximumSize(new Dimension(Integer.MAX_VALUE,
                                      getLayout().preferredLayoutSize(this).height));
+    }
+
+    @Override
+    public void updateConstant() {
+        slider.setValue(f2i(constant.get()));
     }
 
     private int f2i(float d) {

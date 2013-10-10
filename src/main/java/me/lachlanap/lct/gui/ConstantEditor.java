@@ -7,7 +7,7 @@ import me.lachlanap.lct.data.ConstantField;
  *
  * @author Lachlan Phillips
  */
-public class ConstantEditor extends JPanel {
+public abstract class ConstantEditor extends JPanel {
 
     private final ConstantField constant;
 
@@ -18,4 +18,6 @@ public class ConstantEditor extends JPanel {
     public ConstantField getConstant() {
         return constant;
     }
+
+    public abstract void updateConstant();
 }
