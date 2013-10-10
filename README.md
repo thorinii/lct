@@ -7,6 +7,20 @@ This is still a work in progress - as such it shouldn't really be used for 'real
 
 [![Build Status](https://travis-ci.org/ThorinII/lct.png?branch=master)](https://travis-ci.org/ThorinII/lct)
 
+Using Live Constant Tweaker
+===========================
+
+Add this to your Maven pom:
+```
+<dependency>
+    <groupId>me.lachlanap.lct</groupId>
+    <artifactId>lct</artifactId>
+    <version>1.1</version>
+</dependency>
+```
+
+or translate it into the correct format for your build system.
+
 Expected Use
 ============
 
