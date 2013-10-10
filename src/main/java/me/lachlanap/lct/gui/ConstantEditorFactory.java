@@ -22,6 +22,7 @@ public class ConstantEditorFactory {
         addEditor(LongConstantField.class, LongEditor.class);
         addEditor(FloatConstantField.class, FloatEditor.class);
         addEditor(DoubleConstantField.class, DoubleEditor.class);
+        addEditor(BooleanConstantField.class, BooleanEditor.class);
     }
 
     public void addEditor(Class<? extends ConstantField> constant, Class<? extends ConstantEditor> editor) {

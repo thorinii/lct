@@ -1,6 +1,7 @@
 package me.lachlanap.lct.spi.impl;
 
 import me.lachlanap.lct.Constant;
+import me.lachlanap.lct.data.BooleanConstantField;
 import me.lachlanap.lct.data.ConstantField;
 import me.lachlanap.lct.data.DoubleConstantField;
 import me.lachlanap.lct.data.FloatConstantField;
@@ -24,6 +25,8 @@ public class PrimitivesProvider implements ConstantFieldProvider {
             return true;
         if (type == float.class)
             return true;
+        if (type == boolean.class)
+            return true;
         return false;
     }
 
@@ -40,6 +43,8 @@ public class PrimitivesProvider implements ConstantFieldProvider {
             return new FloatConstantField(container, field, annot.name(), annot.constraints());
         if (type == double.class)
             return new DoubleConstantField(container, field, annot.name(), annot.constraints());
+        if (type == boolean.class)
+            return new BooleanConstantField(container, field, annot.name());
         throw new UnsupportedOperationException("Cannot create constant of type " + type.getSimpleName());
     }
 }
