@@ -1,6 +1,7 @@
 package me.lachlanap.lct.data;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -13,6 +14,7 @@ import me.lachlanap.lct.Constant;
  */
 public class ClassInspector {
 
+    private boolean tryMakeAccessible;
     /**
      * The ConstantFieldFactory from construction.
      */
@@ -24,6 +26,7 @@ public class ClassInspector {
      */
     public ClassInspector(ConstantFieldFactory factory) {
         this.factory = factory;
+        tryMakeAccessible = true;
     }
 
     /**
@@ -36,7 +39,11 @@ public class ClassInspector {
         List<Field> fields = Arrays.asList(aClass.getFields());
 
         for (Field field : fields) {
-            constants.add(processField(aClass, field));
+            if (Modifier.isStatic(field.getModifiers())) {
+                if (tryMakeAccessible && !Modifier.isPublic(field.getModifiers()))
+                    field.setAccessible(true);
+                constants.add(processField(aClass, field));
+            }
         }
 
         Iterator<ConstantField> itr = constants.iterator();
@@ -63,5 +70,13 @@ public class ClassInspector {
         }
 
         return null;
+    }
+
+    public boolean getTryMakeAccessible() {
+        return tryMakeAccessible;
+    }
+
+    public void setTryMakeAccessible(boolean tryMakeAccessible) {
+        this.tryMakeAccessible = tryMakeAccessible;
     }
 }
